@@ -11,21 +11,17 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CustomerService extends BasicServiceOperations<CustomerRepository,Customer>{
-    private final PasswordEncoder passwordEncoder;
+    // private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(CustomerRepository repository, PasswordEncoder passwordEncoder) {
+    public CustomerService(CustomerRepository repository) {
         super(repository);
-        this.passwordEncoder = passwordEncoder;
+        // this.passwordEncoder = passwordEncoder;
     }
     @Override
   public Customer save(Customer entity) {
-    if (entity.getId() == null) {
-       entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-    } else {
         Customer user = repository.findById(entity.getId())
           .orElseThrow(() -> new EntityNotFoundException("No entity found with id: " + entity.getId()));
       entity.setPassword(user.getPassword());
-    }
 
     return super.save(entity);
   }
