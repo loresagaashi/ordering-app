@@ -1,7 +1,5 @@
 package com.orderingapp.service;
 
-package com.orderingapp.service;
-
 import com.orderingapp.model.StoreHours;
 import com.orderingapp.repository.StoreHoursRepository;
 
