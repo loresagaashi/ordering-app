@@ -1,6 +1,5 @@
 package com.orderingapp.model;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +19,13 @@ public class StoreHours extends BaseEntity {
     private LocalTime endTime;
 
     @ManyToOne
-    @JoinColumn(name = "deliveryHours_id", nullable = false, foreignKey = @ForeignKey(name = "fk_storeHours_deliveryHours", foreignKeyDefinition = "FOREIGN KEY (deliveryHours_id) REFERENCES deliveryHours(id) ON DELETE RESTRICT"))
+    @JoinColumn(
+        name = "delivery_hours_id", 
+        nullable = false, 
+        foreignKey = @ForeignKey(
+            name = "fk_storeHours_deliveryHours", 
+            foreignKeyDefinition = "FOREIGN KEY (delivery_hours_id) REFERENCES delivery_hours(id) ON DELETE RESTRICT"
+        )
+    )
     private DeliveryHours deliveryHours;
-    
 }

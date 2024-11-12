@@ -15,6 +15,6 @@ public class StoreLocation extends BaseEntity {
     private String nameOfLocation;
 
     @ManyToOne
-    @JoinColumn(name = "store_hours_id", foreignKey = @ForeignKey(name = "fk_store_hours_store_location", foreignKeyDefinition = "FOREIGN KEY (store_hours_id) REFERENCES storeHours(id) ON DELETE RESTRICT"))
+    @JoinColumn(name = "store_hours_id", foreignKey = @ForeignKey(name = "fk_store_hours_store_location", foreignKeyDefinition = "FOREIGN KEY (store_hours_id) REFERENCES store_hours(id) ON DELETE RESTRICT"))
     private StoreHours storeHours;
 }
