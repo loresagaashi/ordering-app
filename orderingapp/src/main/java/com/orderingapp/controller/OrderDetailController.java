@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orderingapp.model.OrderDetail;
 import com.orderingapp.service.OrderDetailService;
-//import com.orderingapp.service.PaymentService;
+import com.orderingapp.service.PaymentService;
 
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
@@ -29,7 +29,7 @@ public class OrderDetailController extends BasicControllerOperations<OrderDetail
         super(service);
     }
 
-//    private PaymentService paymentService;
+   private PaymentService paymentService;
 
     @GetMapping("/all/{status}")
     public Map<LocalDate, List<OrderDetail>> findByDateTimeBetweenAndStatus(@PathVariable String status,
