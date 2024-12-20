@@ -1,21 +1,22 @@
 package com.orderingapp.service;
 
-
-import org.springframework.stereotype.Service;
-
+import com.orderingapp.exception.EntityValidationException;
+import com.orderingapp.exception.ExceptionPayload;
 import com.orderingapp.model.Admin;
 import com.orderingapp.repository.AdminRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class AdminService extends BasicServiceOperations<AdminRepository, Admin> {
 
-    // private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public AdminService(AdminRepository repository) {
+    public AdminService(AdminRepository repository, PasswordEncoder passwordEncoder) {
         super(repository);
-        // this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Optional<Admin> findByEmail(String email) {
@@ -24,11 +25,31 @@ public class AdminService extends BasicServiceOperations<AdminRepository, Admin>
 
     @Override
     public Admin save(Admin entity) {
-        // if (entity.getId() == null) {
-        //     entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-        // }
+        if (entity.getId() == null) {
+            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        }
 
         return super.save(entity);
     }
 
+    public Admin login(String email, String password) {
+        Admin admin = this.repository.findByEmail(email)
+                .orElseThrow(() -> new EntityValidationException(ExceptionPayload.builder()
+                        .code("WrongEmail")
+                        .fieldName("email")
+                        .rejectedValue(email)
+                        .message("Wrong email")
+                        .build())
+                );
+        if (!admin.getPassword().equals(password)) {
+            throw new EntityValidationException(ExceptionPayload.builder()
+                    .code("WrongPassword")
+                    .fieldName("password")
+                    .rejectedValue(password)
+                    .message("Wrong password")
+                    .build());
+        }
+
+        return admin;
+    }
 }

@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
-import useCart from "../home/useCart";
+import useCart from "./home/useCart";
 import useDarkMode from "../hooks/useDarkMode";
 import DarkModeIcon from '@material-ui/icons/Brightness4';
 import LightModeIcon from '@material-ui/icons/Brightness7';
