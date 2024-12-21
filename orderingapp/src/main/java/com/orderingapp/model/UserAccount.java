@@ -2,7 +2,6 @@ package com.orderingapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orderingapp.validation.group.Create;
-
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;

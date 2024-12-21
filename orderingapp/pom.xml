@@ -8,10 +8,10 @@
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mcdonalds</groupId>
-	<artifactId>food-ordering</artifactId>
+	<groupId>com</groupId>
+	<artifactId>ordering-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>food-ordering</name>
+	<name>ordering-app</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
