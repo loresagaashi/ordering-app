@@ -160,7 +160,6 @@ export default function OrderDetails({
   const [editFailed, setEditFailed] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [nameError, setNameError] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -225,7 +224,7 @@ export default function OrderDetails({
 
   useEffect(() => {
     if (user) {
-      setFirstName(user?.user?.firstName);
+      setFirstName(user.user.firstName);      
       setLastName(user.user.lastName);
       setEmail(user?.user?.email);
       setPhoneNumber(user?.user?.phoneNumber);
@@ -312,14 +311,14 @@ export default function OrderDetails({
                 : freeItems.length >= 1
                   ? user.user.totalBonusPoints - 50
                   : user.user.totalBonusPoints,
+                  paymentType: paymentType,
           },
-
-          paymentType: paymentType,
+          // paymentType: paymentType.paymentType,
           notes: notes,
           address: address,
           city: city?.city,
         };
-      } else {
+      } else { //guest mode
         order = {
           status: "IN_PROGRESS",
           dateTime: new Date(),
@@ -336,8 +335,17 @@ export default function OrderDetails({
               notes: "-",
             })),
           ],
-          
-          paymentType: paymentType,
+          customer: {
+            firstName: firstName, 
+            lastName: lastName,
+            email: email,
+            phoneNumber: phoneNumber,
+            address: address,
+            city: city?.city,
+            totalBonusPoints: 0,
+            paymentType: paymentType
+          },
+          paymentType: paymentType?.paymentType,
           notes: notes,
           address: address,
           city: city?.city,
@@ -371,18 +379,6 @@ export default function OrderDetails({
       setMessage("Please fill in all the fields.");
       setOpen(true);
       setError(true);
-    }
-  };
-
-  const handleNameChange = (e) => {
-    const value = e.target.value.trim();
-    const [first, last] = value.split(" ");
-    setFirstName(first || "");
-    setLastName(last || "");
-    if (!first || !last) {
-      setNameError("Please provide both first name and last name.");
-    } else {
-      setNameError("");
     }
   };
 
@@ -469,18 +465,24 @@ export default function OrderDetails({
           </div>
         </div>
 
-        <TextField
-          label="Name and Last Name"
-          onChange={handleNameChange}
-          fullWidth
-          className={classes.input}
-          error={!!nameError}
-        />
-        {nameError && (
-          <Typography variant="body2" className={classes.errorMessage}>
-            {nameError}
-          </Typography>
-        )}
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              label="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              label="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
 
         <TextField
           label="Email"

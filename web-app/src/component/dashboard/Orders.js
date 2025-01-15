@@ -44,7 +44,7 @@ export default function Orders({ orders, visibleOrders, showMoreOrders }) {
             <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>Email</TableCell>
             <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>Address</TableCell>
             <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>City</TableCell>
-            <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>Payment Method</TableCell>
+            {/* <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>Payment Method</TableCell> */}
             <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>Status</TableCell>
             <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }} align="right">Sale Amount</TableCell>
             <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>Order Lines</TableCell>
@@ -63,8 +63,8 @@ export default function Orders({ orders, visibleOrders, showMoreOrders }) {
                     <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{`${order.customer.firstName} ${order.customer.lastName}`}</TableCell>
                     <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{order.customer.email}</TableCell>
                     <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{order.address}</TableCell>
-                    <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{order.city}</TableCell>
-                    <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{order.paymentType}</TableCell>
+                    <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{order.customer.city?.name}</TableCell>
+                    {/* <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{order.paymentType}</TableCell> */}
                     <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }}>{order.status}</TableCell>
                     <TableCell sx={{ color: isDarkMode ? '#fff' : 'inherit' }} align="right">{`$${order.total.toFixed(2)}`}</TableCell>
                     <TableCell>
